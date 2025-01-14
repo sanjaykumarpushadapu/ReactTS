@@ -4,7 +4,6 @@ const chalk = require('chalk'); // Importing chalk for styled console output
 const HtmlWebpackPlugin = require('html-webpack-plugin'); // generate the index.html file
 const MiniCssExtractPlugin = require('mini-css-extract-plugin'); //  CSS into separate files for production
 const ErrorOverlayPlugin = require('error-overlay-webpack-plugin'); // show error overlays in development mode
-const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin'); //React Fast Refresh (HMR) in development
 const WebpackBar = require('webpackbar'); // show a progress bar during the build process
 const CompressionPlugin = require('compression-webpack-plugin'); // Plugin for compressing assets using Brotli and Gzip
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer'); // analyze the final bundle size
@@ -17,40 +16,12 @@ module.exports = (env, argv) => {
   const isDevelopment = argv.mode === 'development';
   const envName = isDevelopment ? 'Development' : 'Production';
   try {
-    // Load the app settings JSON file dynamically based on the environment
-    // const appSettings = JSON.parse(
-    //   fs.readFileSync(
-    //     path.resolve(__dirname, `public/config/appSettings.${envName}.json`),
-    //     'utf-8'
-    //   )
-    // );
-
-    // // Extract SSL certificate paths from app settings
-    // const sslCertPath = appSettings.ssl?.cert;
-    // const sslKeyPath = appSettings.ssl?.key;
-
-    // If SSL certificates are missing in production, log an error and exit the process
-    // if (!isDevelopment && (!sslCertPath || !sslKeyPath)) {
-    //   console.error(
-    //     chalk.red(
-    //       `ERROR: SSL certificate paths not found in ${chalk.yellow(
-    //         path.resolve(__dirname, `public/config/appSettings.${envName}.json`)
-    //       )}`
-    //     )
-    //   );
-    //   console.error(
-    //     chalk.yellow('Ensure SSL cert and key are correctly configured.')
-    //   );
-    //   process.exit(1);
-    // }
-
-    // Common file naming pattern for JS files, differing based on environment
     const fileNaming = isDevelopment
       ? '[name].js' // In development, we use simple names
       : '[name].[contenthash].js'; // In production, use content hashing for cache-busting
 
     return {
-      entry: './src/index.jsx', // The entry point of the application
+      entry: './src/index.tsx', // The entry point of the application
       output: {
         // Output configuration for compiled files
         path: path.resolve(__dirname, 'dist'), // Path to the output directory
@@ -121,9 +92,13 @@ module.exports = (env, argv) => {
             use: {
               loader: 'babel-loader',
               options: {
-                presets: ['@babel/preset-env', '@babel/preset-react'],
+                presets: [
+                  '@babel/preset-env',
+                  '@babel/preset-react',
+                  '@babel/preset-typescript',
+                ],
                 plugins: [
-                  isDevelopment && require.resolve('react-refresh/babel'), // Add React Fast Refresh plugin in development mode
+                  // Enable React Fast Refresh in development
                 ].filter(Boolean),
               },
             },
@@ -193,7 +168,6 @@ module.exports = (env, argv) => {
         // Add error overlay plugin in development for better debugging experience
         isDevelopment && new ErrorOverlayPlugin(),
         // Add React Fast Refresh plugin in development for hot reloading
-        isDevelopment && new ReactRefreshWebpackPlugin(),
         // Enable Brotli and Gzip compression for assets in production
         !isDevelopment &&
           new CompressionPlugin({
@@ -233,15 +207,8 @@ module.exports = (env, argv) => {
         static: path.join(__dirname, 'dist'),
         port: 3000,
         host: 'localhost', // Explicitly set the host to 'localhost'
-        // server: {
-        //   type: 'https', // Serve the application over HTTPS
-        //   options: {
-        //     key: sslKeyPath,
-        //     cert: sslCertPath, // Use the SSL certificates if available
-        //   },
-        // },
         compress: true, // Enable Gzip compression
-        hot: true, // Enable Hot Module Replacement (HMR)
+        hot: false, // Enable Hot Module Replacement (HMR)
         open: true, // Open the browser automatically
         historyApiFallback: true, // Enable single-page application (SPA) routing support
         onListening: (devServer) => {

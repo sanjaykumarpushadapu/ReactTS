@@ -1,5 +1,7 @@
 // configLoader.js
-let cachedConfig = null;
+declare const __ENV__: string;
+
+let cachedConfig: unknown = null;
 
 const loadConfig = async () => {
   if (cachedConfig) return cachedConfig;
@@ -18,9 +20,9 @@ const loadConfig = async () => {
   }
 };
 
-const getConfigByKey = async (key) => {
+const getConfigByKey = async (key: string) => {
   const config = await loadConfig();
-  return config[key];
+  return (config as { [key: string]: unknown })[key];
 };
 
 export { loadConfig, getConfigByKey };
