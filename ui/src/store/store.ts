@@ -1,10 +1,15 @@
-// store/store.ts
+// src/store/store.ts
 import { configureStore } from '@reduxjs/toolkit';
+import postsReducer from './slices/postsSlice';
 
 const store = configureStore({
-  reducer: {},
+  reducer: {
+    posts: postsReducer,
+  },
 });
-// Infer types for TypeScript
+
+// Exporting typed store
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
+
 export default store;
