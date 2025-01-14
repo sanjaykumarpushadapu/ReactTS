@@ -11,6 +11,7 @@ const TerserPlugin = require('terser-webpack-plugin'); // Plugin for JS minifica
 const CopyWebpackPlugin = require('copy-webpack-plugin'); // copy static files (e.g., configuration files)
 const { DefinePlugin } = require('webpack'); // define global constants (like environment variables)
 const HMRLoggingPlugin = require('./Plugin/HMRLoggingPlugin'); // define global constants (like environment variables)
+const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 module.exports = (env, argv) => {
   // Determine if the environment is 'development' or 'production'
   const isDevelopment = argv.mode === 'development';
@@ -31,7 +32,7 @@ module.exports = (env, argv) => {
       },
       resolve: {
         // Resolve both .js and .jsx extensions in imports
-        extensions: ['.js', '.jsx', '.tsx', '.ts'],
+        extensions: ['.ts', '.tsx', '.js'],
       },
       infrastructureLogging: {
         level: 'warn', // Log only warnings and errors to reduce output noise
@@ -84,6 +85,18 @@ module.exports = (env, argv) => {
             test: /\.tsx?$/, // Handle .ts and .tsx files
             use: 'ts-loader',
             exclude: /node_modules/,
+          },
+          {
+            test: /\.(ts|tsx)$/, // Handling TypeScript files
+            use: [
+              {
+                loader: 'ts-loader',
+                options: {
+                  transpileOnly: true, // This speeds up the build process
+                },
+              },
+            ],
+            exclude: /node_modules/, // Exclude node_modules
           },
           // JavaScript and JSX/Tsx transpilation using Babel
           {
@@ -147,6 +160,7 @@ module.exports = (env, argv) => {
         ],
       },
       plugins: [
+        !isDevelopment && new ReactRefreshWebpackPlugin(), // Enable React Fast Refresh
         // Display a progress bar during the build process (in production only)
         !isDevelopment &&
           new WebpackBar({
@@ -208,7 +222,7 @@ module.exports = (env, argv) => {
         port: 3000,
         host: 'localhost', // Explicitly set the host to 'localhost'
         compress: true, // Enable Gzip compression
-        hot: false, // Enable Hot Module Replacement (HMR)
+        hot: true, // Enable Hot Module Replacement (HMR)
         open: true, // Open the browser automatically
         historyApiFallback: true, // Enable single-page application (SPA) routing support
         onListening: (devServer) => {

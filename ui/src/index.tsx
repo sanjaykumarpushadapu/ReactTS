@@ -1,18 +1,18 @@
 import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.scss'; // Import global SCSS styles
-import './styles/main.scss'; // Import additional SCSS styles if needed
+import ReactDOM from 'react-dom/client'; // Import from react-dom/client in React 18
+import './index.scss'; // If you have a global CSS file
 import App from './App';
 
-// Find the root element in the HTML
-const rootElement = document.getElementById('root') as HTMLElement | null;
+// Create a root element and render the app
+const rootElement = document.getElementById('root') as HTMLElement;
+
 if (rootElement) {
-  const root = ReactDOM.createRoot(rootElement);
+  const root = ReactDOM.createRoot(rootElement); // Create the root for React 18
   root.render(
     <React.StrictMode>
       <App />
     </React.StrictMode>
   );
 } else {
-  console.error('Failed to find the root element');
+  console.error('Root element not found!');
 }
