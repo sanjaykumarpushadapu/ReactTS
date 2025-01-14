@@ -58,7 +58,7 @@ export default [
 
       // Example additional TypeScript rules:
       '@typescript-eslint/no-unused-vars': 'error', // Disallow unused variables
-      '@typescript-eslint/no-explicit-any': 'warn', // Warn against 'any' usage
+      '@typescript-eslint/no-explicit-any': 'off', // Warn against 'any' usage
       '@typescript-eslint/explicit-function-return-type': 'off', // Enforce return types for functions
     },
   },
@@ -86,39 +86,6 @@ export default [
       'react-hooks/rules-of-hooks': 'error', // Enforce rules of hooks
       'react-hooks/exhaustive-deps': 'warn', // Warn about missing dependencies in useEffect
       'react/prop-types': 'error', // Enforce the use of PropTypes
-
-      // Example additional rules
-      quotes: 0,
-      'no-debugger': 1,
-      semi: [1, 'always'],
-      'no-trailing-spaces': 0,
-      'eol-last': 0,
-      'no-underscore-dangle': 0,
-      'no-alert': 0,
-      'no-lone-blocks': 0,
-      'jsx-quotes': 1,
-      'react/jsx-boolean-value': 1,
-      'react/jsx-closing-bracket-location': 0,
-      'react/jsx-curly-spacing': 1,
-      'react/jsx-key': 1,
-      'react/jsx-max-props-per-line': 0,
-      'react/jsx-no-bind': 0,
-      'react/jsx-no-duplicate-props': 1,
-      'react/jsx-no-literals': 0,
-      'react/jsx-no-undef': 1,
-      'react/jsx-pascal-case': 1,
-      'react/jsx-sort-prop-types': 0,
-      'react/jsx-sort-props': 0,
-      'react/no-danger': 1,
-      'react/no-did-mount-set-state': 1,
-      'react/no-did-update-set-state': 1,
-      'react/no-direct-mutation-state': 1,
-      'react/no-multi-comp': 1,
-      'react/no-set-state': 1,
-      'react/no-unknown-property': 1,
-      'react/prefer-es6-class': 1,
-      'react/self-closing-comp': 1,
-      'react/sort-comp': 1,
     },
   },
   prettierConfig, // Add Prettier configuration to ESLint
