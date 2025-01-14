@@ -1,0 +1,13 @@
+{
+  "extends": ["stylelint-config-standard", "stylelint-config-recommended-scss"],
+  "plugins": ["stylelint-order", "stylelint-scss"],
+  "rules": {
+    "color-no-invalid-hex": true,
+    "declaration-no-important": true,
+    "no-duplicate-selectors": true,
+    "block-no-empty": true,
+    "order/properties-alphabetical-order": true,
+    "selector-no-vendor-prefix": true,
+    "declaration-block-no-duplicate-properties": true
+  }
+}

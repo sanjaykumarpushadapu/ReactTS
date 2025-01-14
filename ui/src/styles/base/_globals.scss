@@ -1,0 +1,17 @@
+/* Global utility styles */
+@use '../variables/colors' as *;
+
+body {
+  background: #f9f9f9;
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+
+  &:hover {
+    color: $primary-color;
+  }
+}

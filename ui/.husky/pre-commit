@@ -1,0 +1,26 @@
+#!/bin/sh
+
+# Debugging: print the current directory before running lint
+echo "Current directory before running lint: $(pwd)"
+
+# Navigate to the correct 'ui' folder relative to the git repo root
+cd "$(git rev-parse --show-toplevel)/ui" || exit 1
+
+# Debugging: print the current directory after navigating
+echo "Current directory after navigating: $(pwd)"
+
+
+# Execute the format.js script
+node scripts/format.js
+
+# Execute the lint.js script
+node scripts/lint.js
+
+# Execute the styleLint.js script
+node scripts/styleLint.js
+
+# Check exit status and abort commit if linting fails
+if [ $? -ne 0 ]; then
+  echo "Linting failed, commit aborted."
+  exit 1
+fi

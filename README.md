@@ -1,2 +1,0 @@
-# ReactTS
-ReactTS-Boilerplate
