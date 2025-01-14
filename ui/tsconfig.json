@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "target": "ES6", // Specify ECMAScript target version
+    "module": "ESNext", // Use ESNext module system
+    "lib": ["DOM", "DOM.Iterable", "ESNext"], // Libraries to include
+    "strict": true, // Enable all strict type-checking options
+    "esModuleInterop": true, // Support for CommonJS modules
+    "moduleResolution": "Node", // Module resolution strategy
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true, // Support importing JSON files
+    "isolatedModules": true, // Ensure each file is treated as a module
+    "jsx": "react-jsx", // JSX support for React
+    "noEmit": true // Disable emitting JavaScript files
+  },
+  "include": ["src/**/*.ts", "src/**/*.tsx", "src/index.jsx"], // Only include TypeScript files
+  "exclude": ["node_modules"] // Exclude unwanted directories
+}

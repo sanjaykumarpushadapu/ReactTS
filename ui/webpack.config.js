@@ -60,7 +60,7 @@ module.exports = (env, argv) => {
       },
       resolve: {
         // Resolve both .js and .jsx extensions in imports
-        extensions: ['.js', '.jsx'],
+        extensions: ['.js', '.jsx', '.tsx', '.ts'],
       },
       infrastructureLogging: {
         level: 'warn', // Log only warnings and errors to reduce output noise
@@ -109,9 +109,14 @@ module.exports = (env, argv) => {
       },
       module: {
         rules: [
-          // JavaScript and JSX transpilation using Babel
           {
-            test: /\.(js|jsx)$/,
+            test: /\.tsx?$/, // Handle .ts and .tsx files
+            use: 'ts-loader',
+            exclude: /node_modules/,
+          },
+          // JavaScript and JSX/Tsx transpilation using Babel
+          {
+            test: /\.(js|jsx|ts|tsx)$/,
             exclude: /node_modules/, // Exclude node_modules to speed up the build
             use: {
               loader: 'babel-loader',
