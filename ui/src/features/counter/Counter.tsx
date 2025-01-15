@@ -1,11 +1,12 @@
+// src/features/counter/Counter.tsx
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { increment, decrement } from './store';
-import { RootState } from './store';
+import { useAppDispatch, useAppSelector } from '../../app/hooks';
+import { increment, decrement } from './counterSlice';
+
 
 const Counter: React.FC = () => {
-  const dispatch = useDispatch();
-  const value = useSelector((state: RootState) => state.counter.value);
+  const dispatch = useAppDispatch();
+  const value = useAppSelector((state) => state.counter.value);
 
   return (
     <div>
