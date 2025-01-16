@@ -13,31 +13,31 @@
   "description": "",
   "dependencies": {
     "@reduxjs/toolkit": "^2.5.0",
-    "error-overlay-webpack-plugin": "^1.1.1",
-    "mini-css-extract-plugin": "^2.9.2",
     "react": "18.3.X",
     "react-dom": "18.3.X",
-    "react-redux": "^9.2.0",
-    "terser-webpack-plugin": "^5.3.11",
-    "webpackbar": "^7.0.0"
+    "react-redux": "^9.2.0"
   },
   "devDependencies": {
     "@types/react": "^18.3.18",
     "@types/react-dom": "^18.3.5",
     "@types/react-redux": "^7.1.34",
     "@types/redux": "^3.6.31",
+    "chalk": "^4.1.0",
     "compression-webpack-plugin": "^11.1.0",
     "copy-webpack-plugin": "^12.0.2",
     "css-loader": "^7.1.2",
-    "chalk": "^4.1.0",
+    "error-overlay-webpack-plugin": "^1.1.1",
     "html-webpack-plugin": "^5.6.3",
+    "mini-css-extract-plugin": "^2.9.2",
     "querystring-es3": "^0.2.1",
     "style-loader": "^4.0.0",
+    "terser-webpack-plugin": "^5.3.11",
     "ts-loader": "^9.5.2",
     "typescript": "^5.7.3",
     "webpack": "^5.97.1",
     "webpack-bundle-analyzer": "^4.10.2",
     "webpack-cli": "^6.0.1",
-    "webpack-dev-server": "^5.2.0"
+    "webpack-dev-server": "^5.2.0",
+    "webpackbar": "^7.0.0"
   }
 }
